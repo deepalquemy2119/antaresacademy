@@ -1,0 +1,32 @@
+@import url('./index.css');
+
+
+
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #5e676d;
+    color: #051f46;
+    text-align: center;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li a {
+    display: block;
+    padding: 1rem;
+    margin: 1rem auto;
+    background-color: #596c7c;
+    color: white;
+    text-decoration: none;
+    width: 240px;
+    border-radius: 8px;
+}
+li a:hover {
+    background-color: #1565c0;
+}
+
+/* .logo-subtitle{
+    font-size: 28px;
+} */

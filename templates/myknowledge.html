@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Conocimiento - Antares</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/myknowledge.css') }}">
+
+
+
+</head>
+<body>
+
+<div class="logo-section">
+ 
+  <div class="logo-container">
+    <img src="{{ url_for('static', filename='img/logo-antares-4.png') }}" alt="Logo Antares" class="logo-img" />
+    <p class="logo-subtitle">Academy</p>
+  </div>
+
+   <div class="theme-toggle-container">
+    <button id="theme-toggle">White</button>
+  </div>
+
+</div>
+
+
+  <main>
+    
+    
+    <h1>My Knowledge</h1>
+
+
+
+    <p>Gestiona cursos mensajes membresias clases y mas.</p>
+
+    
+  <section class="knowledge-section">
+    <h1>Conocimiento adquirido por: {Usuario}</h1>
+    
+    <div class="enrolled-courses">
+      <h2>Cursos Inscriptos</h2>
+      <div class="course-list">
+        <div class="course-item">
+          <h3>Python desde Cero</h3>
+          <div class="progress-bar">
+            <div class="progress" style="width: 70%;"></div>
+          </div>
+          <p>Progreso: 70%</p>
+        </div>
+
+        <div class="course-item">
+          <h3>Fotografía Digital</h3>
+          <div class="progress-bar">
+            <div class="progress" style="width: 45%;"></div>
+          </div>
+          <p>Progreso: 45%</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="certificates-section">
+      <h2>Certificados Obtenidos</h2>
+      <ul class="certificates-list">
+        <li>✔ Fundamentos de HTML y CSS</li>
+        <li>✔ Introducción al Diseño Gráfico</li>
+      </ul>
+    </div>
+  </section>
+
+
+    <a href="{{ url_for('index') }}" class="nav-btn">Volver al inicio</a>
+<button class="nav-btn" onclick="history.back()">Volver a la anterior</button>
+
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Antares Academy. Todos los derechos reservados.</p>
+  </footer>
+
+
+
+  <script>
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "Dark";
+    } else {
+      toggleBtn.textContent = "White";
+    }
+  });
+</script>
+
+
+</body>
+</html>

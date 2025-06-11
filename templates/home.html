@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Home Antares{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block subtitle %}
+  <div>
+    <h3 class="logo-subtitle">Academy</h3>
+  </div>
+{% endblock %}
+
+{% block categorias %}
+<!-- No mostrar categorías ACA -->
+{% endblock %}
+
+{% block content %}
+ <div class="ingreso-contenedor">
+  <h5 class="ingreso">Ingresa como:</h5>
+
+  <div class="rol-botones">
+    <a href="{{ url_for('alumno') }}" class="rol-btn">Alumno</a>
+    <a href="{{ url_for('admin') }}" class="rol-btn">Administrador</a>
+    <a href="{{ url_for('tutor') }}" class="rol-btn">Tutor</a>
+  </div>
+  <br><br><br><br>
+</div>
+
+  <br><br><br><br>
+
+  <nav>
+    <div>
+      <a href="{{ url_for('base') }}" class="btn btn-orange">Volver al inicio</a>
+    </div>
+  </nav>
+
+  <br><br><br>
+{% endblock %}
+
+{% block buscador %}
+<!-- vacio por ahora -->
+{% endblock %}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}Antares{% endblock %}</title>
+
+   
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  {% block extra_styles %}{% endblock %}
+
+
+ <!-- Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-yHmbR8V/4B0q0YoV7eUmVXRzAFlYXy1+fPGeS+Jc+crn3nAe+iDdD5sDksqYIN0xRpU1KjBKHZuOkaZ2EeeFwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+</head>
+<body>
+  <!-- ---------------- Header ------------------ -->
+  <header class="site-header">
+
+   <div class="logo-section">
+ 
+      {% block logo %}
+        <div class="logo-container">
+        <img src="{{ url_for('static', filename='img/logo-antares-4.png') }}" alt="Logo Antares" class="logo-img" />
+        </div>
+
+      {% endblock %}
+
+      {% block subtitle %}
+    <p class="logo-subtitle">Academy</p>
+        {% endblock %}
+  </div>
+</header>
+
+<div class="theme-toggle-container">
+      <button id="theme-toggle">White</button>
+  </div>
+    
+   {% block content %}
+
+<!-- ----------------------- Main ------------------- -->
+<main class="main-content">
+    <div class="main-nav">
+ 
+  <a href="{{ url_for('home') }}" class="nav-btn m-4">Home</a>
+<a href="{{ url_for('account') }}" class="nav-btn m-4">Account</a>
+<a href="{{ url_for('myknowledge') }}" class="nav-btn m-4">My Knowledge</a>
+ {% endblock %}
+<!-- -------------- Navegacion -------------- -->
+
+
+
+
+    
+</main>
+
+<!-- --------------------- Section --------------------- -->
+
+{% block categorias %}
+<section class="categories-section"><br><br><br>
+  <h2 class="categories-title">Categories</h2>
+  <div class="categories-grid">
+    <div class="category-tile">Programming</div>
+    <div class="category-tile">Design</div>
+    <div class="category-tile">Marketing</div>  
+    <div class="category-tile">Business</div>  
+    <div class="category-tile">Photography</div>   
+    <div class="category-tile">Languages</div>
+  </div>
+</section>
+{% endblock %}
+
+<!-- --------- Barra de búsqueda ----------- -->
+{% block buscador %}
+<div class="search-container">
+  <input type="text" id="search-input" placeholder="buscar ..." /><br>
+  <button id="search-button"><i class="fas fa-search">Search</i></button>
+</div>
+{% endblock %}
+
+ 
+<footer class="site-footer">
+   <p>&copy; {{ fecha_completa }} Antares Academy.<br><br> Todos los derechos reservados.</p>
+
+    <div class="social-links">
+        <br>
+      <a href="#"><i class="fab fa-youtube"></i> <img src="{{ url_for('static', filename='img/icons/icon-youtube-img.png') }}" alt="icon-youtube" class="icon-youtube-img" /></a>
+       <a href="#"><i class="fab fa-pinterest"></i> <img src="{{ url_for('static', filename='img/icons/icon-pinterest-img.png') }}" alt="icon-pinterest" class="icon-pinterest-img" /></a>
+      <a href="#"><i class="fab fa-gmail"></i> <img src="{{ url_for('static', filename='img/icons/icon-gmail-img.png') }}" alt="icon-gmail" class="icon-gmail-img" /></a>
+       <a href="#"><i class="fab fa-whatsapp"></i> <img src="{{ url_for('static', filename='img/icons/icon-whatsapp-img.png') }}" alt="icon-whatsapp" class="icon-whatsapp-img" /></a>
+    </div>
+  </footer>
+
+<!-- --------------- Modo Oscuro --------------- -->
+  <script>
+    const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    // Cambiar el texto del botón
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "Dark";
+    } else {
+      toggleBtn.textContent = "White";
+    }
+  });
+</script>
+
+
+
+
+<!-- --------------- Search ---------------- -->
+
+
+<script>
+  const searchBtn = document.getElementById("search-button");
+  const searchInput = document.getElementById("search-input");
+
+  searchBtn.addEventListener("click", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    // array con términos reales de la plataforma
+    const searchRoutes = {
+      "programming": "/courses/programming",
+      "design": "/courses/design",
+      "marketing": "/courses/marketing",
+      "negocios": "/courses/business",
+      "fotografía": "/courses/photography",
+      "idiomas": "/courses/languages"
+    };
+
+    for (let keyword in searchRoutes) {
+      if (query.includes(keyword)) {
+        window.location.href = searchRoutes[keyword];
+        return;
+      }
+    }
+
+    alert("No se encontraron resultados para: " + query);
+  });
+</script>
+
+
+
+</body>
+</html>
+

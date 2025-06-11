@@ -1,0 +1,490 @@
+Crear dentro delframework: en mi caso, VS code, en consola: 
+
+Tengo Manjaro, por eso las instrucciones: 
+ 
+1°- $ sudo pacman -S pip
+2°- $ pip install flask
+3°-   python -m venv venv  --> para crear el entorno virtual, python me lo pide 
+			por que sino me devuelve un error el querer levantar app.py
+4°- $ source venv/bin/activate --> para activar entorno virtual
+5°- $ python app.py --> para ejecutar app.py y poder ver las vistas( mockups )
+
+
+
+
+
+Para index.html, y app.py: 
+
+
+<!--  Supuestos base
+
+    Estás usando Flask como backend.
+
+    Tienes una lógica de autenticación implementada (por ejemplo, usando flask-login o una sesión con session['user']).
+
+    El usuario tiene un campo como: session['role'] y session['username'].
+
+👨‍💻 1. BACKEND (Flask) – Pasar datos de sesión al frontend
+
+En tu ruta del index, debes enviar la sesión al HTML:
+
+from flask import render_template, session
+
+@app.route('/')
+def index():
+    user_info = {
+        'logged_in': 'username' in session,
+        'username': session.get('username'),
+        'role': session.get('role')  # puede ser 'alumno', 'tutor', 'admin'
+    }
+    return render_template('index.html', user=user_info)
+
+🧠 2. FRONTEND – Mostrar alerta según sesión
+
+En tu index.html, dentro de un <script> justo antes del </body>, puedes hacer esto:
+🔧 Agrega este bloque justo después de cargar el body o en el mismo script donde está el modo oscuro:
+
+<script>
+  // Variables pasadas desde Flask
+  const user = {{ user | tojson }};
+  
+  window.addEventListener("DOMContentLoaded", () => {
+    if (!user.logged_in) {
+      alert("No has iniciado sesión.");
+    } else {
+      alert(`Sesión iniciada como ${user.username} (${user.role})`);
+    }
+
+    // Control de accesos por rol
+    const role = user.role;
+
+    // Ejemplo de restricciones
+    if (role === "alumno") {
+      // deshabilita botones o rutas no permitidas
+      document.querySelectorAll('.admin-only, .tutor-only').forEach(el => el.style.display = 'none');
+    } else if (role === "tutor") {
+      document.querySelectorAll('.admin-only, .student-only').forEach(el => el.style.display = 'none');
+    } else if (role === "admin") {
+      document.querySelectorAll('.student-only, .tutor-only').forEach(el => el.style.display = 'none');
+    }
+  });
+</script>
+
+✏️ 3. HTML – Etiqueta los elementos por roles
+
+Agrega clases como admin-only, tutor-only, student-only para controlarlo fácilmente.
+
+Ejemplo:
+
+<a href="{{ url_for('admin_dashboard') }}" class="nav-btn m-4 admin-only">Admin Panel</a>
+<a href="{{ url_for('my_courses') }}" class="nav-btn m-4 student-only">Mis Cursos</a>
+<a href="{{ url_for('tutor_dashboard') }}" class="nav-btn m-4 tutor-only">Panel Tutor</a>
+
+🔒 4. BACKEND – Seguridad
+
+Recuerda que ocultar enlaces en el frontend no es suficiente. Asegúrate que en las rutas del backend verifiques el rol, por ejemplo:
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    if session.get('role') != 'admin':
+        return "Acceso denegado", 403
+    return render_template('admin_dashboard.html')
+
+✅ Resultado
+
+Con esta implementación:
+
+    Se muestra un alert al cargar según el estado de sesión.
+
+    Se restringen visualmente las secciones según el rol.
+
+    La lógica de backend protege contra accesos indebidos.
+
+¿Querés que te lo pase como archivo .html y .py, o seguimos expandiendo alguna parte (por ejemplo, estructura de base de datos o roles más detallados)?
+
+
+ChatGPT puede cometer errores. Comprueba la información importante.
+ -->
+
+
+ //======================================================================================
+
+ Firebase-Deploy-GitHub
+
+ (venv) [jaden9112@jaden9112 Antares_Project]$ firebase init hosting
+
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/jaden9112/Escritorio/Antares_Academy/Antares_Project
+
+
+=== Project Setup
+
+First, let's associate this project directory with a Firebase project.
+You can create multiple project aliases by running firebase use --add, 
+but for now we'll just set up a default project.
+
+? Please select an option: Create a new project
+i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project.
+? Please specify a unique project id (warning: cannot be modified afterward) [6-30 characters]:
+ antaresacademy
+? What would you like to call your project? (defaults to your project ID) antaresacademy
+✔ Creating Google Cloud Platform project
+✔ Adding Firebase resources to Google Cloud Platform project
+
+🎉🎉🎉 Your Firebase project is ready! 🎉🎉🎉
+
+Project information:
+   - Project ID: antaresacademy
+   - Project Name: antaresacademy
+
+Firebase console is available at
+https://console.firebase.google.com/project/antaresacademy/overview
+i  Using project antaresacademy (antaresacademy)
+
+=== Hosting Setup
+
+Your public directory is the folder (relative to your project directory) that
+will contain Hosting assets to be uploaded with firebase deploy. If you
+have a build process for your assets, use your build's output directory.
+
+? What do you want to use as your public directory? public
+? Configure as a single-page app (rewrite all urls to /index.html)? Yes
+? Set up automatic builds and deploys with GitHub? Yes
+✔  Wrote public/index.html
+
+i  Didn't detect a .git folder. Assuming /home/jaden9112/Escritorio/Antares_Academy/Antares_Project is the project root.
+i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store.
+
+Visit this URL on this device to log in:
+https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=658587491&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+
+Waiting for authentication...
+
+✔  Success! Logged into GitHub as deepalquemy2119
+
+? For which GitHub repository would you like to set up a GitHub workflow? (format: user/repository) deepalquemy2119/antaresacademy
+
+✔  Created service account github-action-995780281 with Firebase Hosting admin permissions.
+✔  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_ANTARESACADEMY.
+i  You can manage your secrets at https://github.com/deepalquemy2119/antaresacademy/settings/secrets.
+
+? Set up the workflow to run a build script before every deploy? Yes
+? What script should be run before every deploy? npm ci && npm run build
+
+✔  Created workflow file /home/jaden9112/Escritorio/Antares_Academy/Antares_Project/.github/workflows/firebase-hosting-pull-request.yml
+? Set up automatic deployment to your site's live channel when a PR is merged? Yes
+? What is the name of the GitHub branch associated with your site's live channel? main
+
+✔  Created workflow file /home/jaden9112/Escritorio/Antares_Academy/Antares_Project/.github/workflows/firebase-hosting-merge.yml
+
+i  Action required: Visit this URL to revoke authorization for the Firebase CLI GitHub OAuth App:
+https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+i  Action required: Push any new workflow file(s) to your repo
+
+i  Writing configuration info to firebase.json...
+i  Writing project information to .firebaserc...
+i  Writing gitignore file to .gitignore...
+
+✔  Firebase initialization complete!
+
+
+Deploy
+
+(venv) [jaden9112@jaden9112 Antares_Project]$ npm install firebase
+
+added 86 packages in 21s
+
+3 packages are looking for funding
+  run `npm fund` for details
+(venv) [jaden9112@jaden9112 Antares_Project]$ firebase deploy
+
+=== Deploying to 'antaresacademy'...
+
+i  deploying hosting
+i  hosting[antaresacademy]: beginning deploy...
+i  hosting[antaresacademy]: found 1 files in public
+✔  hosting[antaresacademy]: file upload complete
+i  hosting[antaresacademy]: finalizing version...
+✔  hosting[antaresacademy]: version finalized
+i  hosting[antaresacademy]: releasing new version...
+✔  hosting[antaresacademy]: release complete
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/antaresacademy/overview
+Hosting URL: https://antaresacademy.web.app
+
+
+
+//=======================================================================
+SDK:
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBO24lbHi2qPapr4PTdg2SHNRJIQmItmM4",
+  authDomain: "antares-academy.firebaseapp.com",
+  projectId: "antares-academy",
+  storageBucket: "antares-academy.firebasestorage.app",
+  messagingSenderId: "482206884527",
+  appId: "1:482206884527:web:e7aa44d5824b3fb4722a5a",
+  measurementId: "G-RW6PYF4YCR"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+=====================================
+
+
+
+Revisión actual de base_alumno.html
+
+Tu layout incluye:
+
+    head.html: correcto.
+
+    header.html: correcto (presumiblemente incluye logo y/o botón de cambio de tema).
+
+    main-nav: menú superior con navegación básica.
+
+    Bloque {% block content %} para insertar contenido del alumno.
+
+    footer.html y scripts.html: modularización bien hecha.
+
+Está muy bien. Pero si buscás una mejora estética o estructural, podrías considerar lo siguiente:
+✅ Versión mejorada con menú lateral (opcional)
+
+Si querés una experiencia más parecida a una plataforma académica moderna:
+
+<!-- templates/base_alumno.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% include 'partials/head.html' %}
+  <title>{% block title %}Alumno - Antares Academy{% endblock %}</title>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <div class="layout-con-menu">
+    <aside class="sidebar">
+      <h3>Menú Alumno</h3>
+      <ul>
+        <li><a href="{{ url_for('alumno') }}">Mis Cursos</a></li>
+        <li><a href="{{ url_for('account') }}">Mi Cuenta</a></li>
+        <li><a href="{{ url_for('home') }}">Inicio</a></li>
+        <li><a href="{{ url_for('logout') }}">Salir</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  {% include 'partials/footer.html' %}
+  {% include 'partials/scripts.html' %}
+</body>
+</html>
+
+✅ CSS necesario (en index.css o alumno.css)
+
+Ya te lo dejé antes, pero si usás menú lateral necesitás:
+
+.layout-con-menu {
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  padding: 1rem;
+  background-color: #f4f4f4;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+}
+
+.sidebar a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+✅ ¿Qué sigue?
+
+    Si te quedás con tu versión actual (main-nav superior), está perfecto. Solo asegurate de que tenga estilos coherentes y sea responsive.
+
+    Si querés la versión con menú lateral (como plataformas como Moodle o Edmodo), te puedo ayudar a migrar fácilmente.
+
+    Te puedo generar ahora un ejemplo de dashboard_alumno.html que herede de este base_alumno.html.
+
+¿Querés seguir con el dashboard_alumno.html de ejemplo o revisar cómo se vería la versión con menú lateral en tu caso
+
+
+==============================================
+==============================================
+==============================================
+==============================================
+
+sesiones:
+
+Objetivo funcional
+
+    Si el usuario no está logueado, y hace clic en “Alumno”, “Tutor” o “Administrador” desde el home.html, será redirigido al formulario de login.
+
+    Si se loguea correctamente, se le redirige a su sección según su rol.
+
+    Si intenta entrar a una sección que no corresponde con su rol, se le deniega el acceso (403.html).
+
+    El sistema recuerda quién está logueado y muestra su email o rol en pantalla.
+
+    Pueda cerrar sesión correctamente.
+
+✅ PASO 1: Define los usuarios (simulación en memoria)
+
+Agrega arriba en tu app.py:
+
+# Usuarios de ejemplo
+USUARIOS = {
+    "alumno@email.com": {"usuario": "JuanAlumno", "clave": "123", "rol": "alumno"},
+    "admin@email.com": {"usuario": "AnaAdmin", "clave": "admin123", "rol": "admin"},
+    "tutor@email.com": {"usuario": "TomasTutor", "clave": "tutor123", "rol": "tutor"},
+}
+
+    ⚠️ Luego puedes conectarlo a una base de datos real si deseas.
+
+✅ PASO 2: Protege rutas de acceso directo
+
+Tus rutas como /alumno, /admin, etc. ya están bien protegidas con:
+
+if session.get('rol') != 'alumno':
+    return redirect(url_for('acceso_denegado'))
+
+➡️ Mantén eso.
+✅ PASO 3: Botones del home.html deben ir al login, no directo a las secciones
+
+Reemplaza en tu home.html:
+
+<a href="{{ url_for('alumno') }}" class="rol-btn">Alumno</a>
+<a href="{{ url_for('admin') }}" class="rol-btn">Administrador</a>
+<a href="{{ url_for('tutor') }}" class="rol-btn">Tutor</a>
+
+Por esto (agregando el parámetro rol en la URL):
+
+<a href="{{ url_for('login', rol='alumno') }}" class="rol-btn">Alumno</a>
+<a href="{{ url_for('login', rol='admin') }}" class="rol-btn">Administrador</a>
+<a href="{{ url_for('login', rol='tutor') }}" class="rol-btn">Tutor</a>
+
+✅ PASO 4: Modifica la ruta /login en app.py
+
+Actualízala así para que detecte el rol que se quiere loguear:
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    rol = request.args.get('rol')  # leer el rol que se quiere acceder
+
+    if request.method == 'POST':
+        email = request.form['email']
+        clave = request.form['clave']
+        user = USUARIOS.get(email)
+
+        if user and user['clave'] == clave:
+            if rol and user['rol'] != rol:
+                error = 'Rol incorrecto. Estás intentando acceder como otro tipo de usuario.'
+            else:
+                session['usuario'] = email
+                session['rol'] = user['rol']
+                session['username'] = user['usuario']
+                return redirect(url_for(user['rol']))  # redirige a alumno, tutor, admin
+        else:
+            error = 'Correo o contraseña incorrectos.'
+
+    return render_template('login.html', error=error, rol=rol)
+
+✅ PASO 5: Crea un formulario de login (templates/login.html)
+
+Ejemplo básico:
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+  <div style="max-width: 400px; margin: auto; padding: 2rem;">
+    <h2>Login {{ rol | capitalize if rol else '' }}</h2>
+
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post">
+      <label for="email">Email:</label><br>
+      <input type="text" id="email" name="email"><br><br>
+
+      <label for="clave">Contraseña:</label><br>
+      <input type="password" id="clave" name="clave"><br><br>
+
+      <button type="submit">Iniciar sesión</button>
+    </form>
+  </div>
+</body>
+</html>
+
+✅ PASO 6: Mostrar el nombre del usuario en el layout (base.html)
+
+En base.html, por ejemplo en el header o al lado del botón de logout:
+
+{% if session.get('username') %}
+  <p style="text-align:right; margin-right:20px;">Bienvenido, {{ session['username'] }} ({{ session['rol'] }})</p>
+{% endif %}
+
+✅ PASO 7: Agrega botón logout donde quieras
+
+En el header o footer:
+
+{% if session.get('rol') %}
+  <a href="{{ url_for('logout') }}" class="nav-btn">Cerrar sesión</a>
+{% endif %}
+
+✅ Resultado Final
+
+    Si haces clic en "Alumno", vas a login?rol=alumno, y solo podrás ingresar si eres un alumno.
+
+    Si ya estás logueado, se te redirige automáticamente a tu panel.
+
+    Puedes controlar desde session['rol'] en todas tus vistas.
+
+    session.clear() en /logout elimina todo.
+
+¿Te gustaría que te muestre también cómo guardar sesiones con cookies o base de datos para que persista el login más allá de cerrar el navegador?

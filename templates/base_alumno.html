@@ -1,0 +1,117 @@
+<!-- templates/base_alumno.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% include 'partials/head.html' %}
+  <title>Alumno - Antares</title>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <div class="layout-con-menu" style="display: flex; flex-wrap: wrap;">
+    <aside class="sidebar" style="min-width: 200px; padding: 1rem; background-color: #1a2a3a; color: #f1f1f1;">
+      <h3 style="margin-bottom: 1rem;">Menú Alumno</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        <li><a class="nav-btn" href="{{ url_for('alumno') }}">Mis Cursos</a></li>
+        <li><a class="nav-btn" href="{{ url_for('account') }}">Mi Cuenta</a></li>
+        <li><a class="nav-btn" href="{{ url_for('home') }}">Inicio</a></li>
+        <li><a class="nav-btn" href="{{ url_for('logout') }}">Salir</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  {% include 'partials/footer.html' %}
+  {% include 'partials/scripts.html' %}
+</body>
+</html>
+
+
+<!-- ✅ base_alumno.html
+
+{% extends "base.html" %}
+
+{% block title %}Panel del Alumno - Antares{% endblock %}
+
+{% block content %}
+  <section class="dashboard">
+    <h1 class="section-title">Bienvenido, Alumno</h1>
+
+    <div class="student-actions">
+      <a href="{{ url_for('ver_cursos') }}" class="nav-btn">Mis Cursos</a>
+      <a href="{{ url_for('historial') }}" class="nav-btn">Historial</a>
+      <a href="{{ url_for('mensajes') }}" class="nav-btn">Mensajes</a>
+    </div>
+
+    <div class="noticias">
+      <h2>Novedades</h2>
+      <p>Aquí verás noticias, nuevos cursos o anuncios importantes.</p>
+    </div>
+  </section>
+{% endblock %}
+
+✅ base_tutor.html
+
+{% extends "base.html" %}
+
+{% block title %}Panel del Tutor - Antares{% endblock %}
+
+{% block content %}
+  <section class="dashboard">
+    <h1 class="section-title">Bienvenido, Tutor</h1>
+
+    <div class="tutor-actions">
+      <a href="{{ url_for('crear_curso') }}" class="nav-btn">Crear Curso</a>
+      <a href="{{ url_for('mis_cursos') }}" class="nav-btn">Mis Cursos</a>
+      <a href="{{ url_for('mensajes') }}" class="nav-btn">Mensajes de Alumnos</a>
+    </div>
+
+    <div class="estadisticas">
+      <h2>Estadísticas de Actividad</h2>
+      <p>Aquí podrás ver el progreso de tus cursos y el rendimiento de tus alumnos.</p>
+    </div>
+  </section>
+{% endblock %}
+
+✅ Cómo usarlas
+
+En tus vistas de Flask (app.py):
+
+from flask import render_template, session
+
+@app.route('/dashboard')
+def dashboard():
+    if session.get('rol') == 'alumno':
+        return render_template('base_alumno.html', fecha_completa='2025')
+    elif session.get('rol') == 'tutor':
+        return render_template('base_tutor.html', fecha_completa='2025')
+    else:
+        return render_template('base.html', fecha_completa='2025')  # u otro layout por defecto
+
+🧩 Recomendaciones para mejorar experiencia:
+
+    Agrega un layout visual por rol con clases CSS distintas:
+
+    .dashboard {
+      padding: 2rem;
+    }
+    .student-actions, .tutor-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      background-color: var(--accent-color);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+    }
+
+    Controla el acceso por rol en Flask para evitar que un alumno vea el layout de tutor.
+
+¿Quieres que prepare también un archivo base_admin.html o prefieres enfocarnos ahora en conectar esto con la navegación u otras vistas reales (como mis_cursos, mensajes, etc.)?
+ -->

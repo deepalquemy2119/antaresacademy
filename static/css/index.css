@@ -1,0 +1,325 @@
+/* ===== RESET Y BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html, body {
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #121e28;
+  color: #c0c6cb;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+/* ===== MODO CLARO ===== */
+body.light-mode {
+  background-color: #f5f7f9;
+  color: #111;
+}
+body.light-mode .logo-subtitle {
+  color: #333;
+  opacity: 0.6;
+}
+body.light-mode .logo-section {
+  background-color: #d7e0e5;
+}
+body.light-mode .site-footer {
+  background-color: #d1d1d1;
+  color: #111;
+}
+body.light-mode .social-links a {
+  color: #222;
+}
+
+body.light-mode .social-links a:hover {
+  color: #666;
+}
+body.light-mode .category-tile {
+  background-color: #dee7eb;
+  color: #111;
+}
+body.light-mode .category-tile:hover {
+  background-color: #cfd9de;
+}
+body.light-mode .top-nav {
+  background-color: #dbe3e7;
+}
+body.light-mode .nav-btn {
+  background-color: #cfd9de;
+  color: #111;
+  border: 1px solid #a3afb5;
+}
+body.light-mode .nav-btn:hover {
+  background-color: #bfcad1;
+}
+/* ===== BOTÓN DE CAMBIO DE TEMA ===== */
+.theme-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1px;
+  margin-top: 10px;
+}
+
+#theme-toggle {
+  padding: 0.5rem 1rem;
+  margin-right: 30px;
+  font-size: 0.7rem;
+  background-color: #909394;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#theme-toggle:hover {
+  background-color: #7f8283;
+}
+/* ===== LOGO Y ENCABEZADO ===== */
+.logo-section {
+  padding: 2rem 1rem;
+  background-color: #1a2a3a;
+  color: #f3f3be;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.logo-subtitle {
+  font-size: 1.1rem;
+  color: #f1f1f1;
+  margin-top: 0.4rem;
+  letter-spacing: 0.1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+/* ===== NAVEGACIÓN PRINCIPAL ===== */
+.top-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem;
+}
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 25px;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 5px;
+  background-color: #145da0;
+  color: #fff;
+  border: 1px solid #1f5b97;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.nav-btn:hover {
+  background-color: #0f3c67;
+  transform: translateY(-2px);
+}
+/* ===== CONTENIDO PRINCIPAL ===== */
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+/* ===== FOOTER ===== */
+.site-footer {
+  background-color: #1a2a3a;
+  color: #aeb3b9;
+  padding: 1.2rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #b66b6b;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.75rem;
+  transition: color 0.2s ease;
+}
+.social-links a:hover {
+  color: #87b0f6;
+}
+.social-links a i {
+  font-size: 1rem;
+  color: #efd28e;
+}
+
+
+.social-links img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+.social-links a:hover img {
+  transform: scale(1.1);
+}
+/* ===== CATEGORÍAS ===== */
+.categories-section {
+  padding: 2rem 1rem;
+  max-width: 100%;
+}
+.categories-title {
+  font-size: 1.4rem;
+  color: #f59b0a;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.7rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+.category-tile {
+  background-color: #1e4974;
+  color: #fff8dc;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.category-tile:hover {
+  transform: translateY(-3px);
+  background-color: #2a4d66;
+}
+/* ===== SEARCH BAR ===== */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto; /* centrado horizontal */
+  padding: 5px;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 600px;
+}
+
+
+
+#search-input {
+  padding: 0.6rem 1rem;
+  width: 100%;
+  max-width: 420px;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: #273746;
+  color: #fff8dc;
+  outline: none;
+}
+body.light-mode #search-input {
+  background-color: #d9e3e6;
+  color: #111;
+}
+#search-button {
+  padding: 0.6rem 1rem;
+  background-color: #87b0f6;
+  color: #111;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+#search-button:hover {
+  background-color: #6794d6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .logo-img {
+    max-width: 180px;
+  }
+  .logo-subtitle {
+    font-size: 0.9rem;
+  }
+  .nav-btn {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .category-tile {
+    font-size: 0.8rem;
+  }
+  #theme-toggle {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+/* ----------- para el home ------------*/
+.btn {
+    display: inline-block;
+    margin: 1rem;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    background-color: #2e2f2f;
+    color: rgb(200, 194, 194);
+    border-radius: 5px;
+    max-width: 380px;
+}
+.ingreso {
+  text-align:justify;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.logo-subtitle {
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  
+  font-size: 21px;
+  font-weight: 300;
+  color: #747678;
+}
+
+

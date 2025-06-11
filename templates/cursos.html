@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cursos</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/cursos.css') }}">
+
+</head>
+<body>
+  <div class="logo-section">
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='img/logo-antares-4.png') }}" alt="Logo Antares">
+      <p class="logo-subtitle">Academy</p>
+    </div>
+  </div>
+
+  <main>
+    <h1>Catálogo de Cursos</h1>
+    <div class="course-grid">
+      {% for curso in cursos %}
+      <div class="course-card">
+        <h2>{{ curso.titulo }}</h2>
+        <p>{{ curso.descripcion }}</p>
+        <p><strong>${{ curso.precio / 100 }}</strong></p>
+        <form action="{{ url_for('comprar', curso_id=curso.id) }}" method="post">
+          <button type="submit" class="nav-btn">Comprar</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Antares Academy</p>
+  </footer>
+
+
+
+<script>
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "Dark";
+    } else {
+      toggleBtn.textContent = "White";
+    }
+  });
+</script>
+
+
+</body>
+</html>

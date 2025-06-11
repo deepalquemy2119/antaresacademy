@@ -1,0 +1,19 @@
+<!-- templates/login.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+  <h2>Iniciar Sesión</h2>
+  {% if error %}
+    <p class="error-msg">{{ error }}</p>
+  {% endif %}
+  <form method="POST" action="{{ url_for('login') }}" class="login-form">
+    <label for="email">Correo electrónico:</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="clave">Contraseña:</label>
+    <input type="password" name="clave" id="clave" required>
+
+    <button type="submit" class="btn-primary">Ingresar</button>
+  </form>
+</div>
+{% endblock %}

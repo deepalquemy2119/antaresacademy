@@ -1,0 +1,56 @@
+@import url('./index.css');
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+   font-family: 'Segoe UI', sans-serif;
+    background: #a0a3a6;
+    color: #1f1b2e;
+}
+
+header {
+  background-color: #1a2a3a;
+  color: #f1f1f1;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  color: inherit;
+}
+
+main ul {
+  margin-top: 1rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+main li {
+  margin: 0.7rem 0;
+}
+
+main a {
+  color: #04132e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main a:hover {
+  color: #a73a5b;
+}
+
+.nav-btn-container {
+  margin-top: 2rem;
+}
+
+footer {
+  background-color: #1a2a3a;
+  color: #aeb3b9;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+}

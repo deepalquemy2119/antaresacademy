@@ -1,0 +1,35 @@
+<!-- templates/base_tutor.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% include 'partials/head.html' %}
+  <title>Tutor - Antares</title>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <div class="main-nav">
+    <a href="{{ url_for('tutor') }}" class="nav-btn">Mis Sesiones</a>
+    <a href="{{ url_for('account') }}" class="nav-btn">Mi Cuenta</a>
+    <a href="{{ url_for('home') }}" class="nav-btn">Inicio</a>
+    <a href="{{ url_for('logout') }}" class="nav-btn">Salir</a>
+  </div>
+
+  <main class="main-content">
+
+<!-- ------------------------------------ -->
+{% block mainnav %}
+<nav class="sidebar-nav">
+  <a href="/tutor/cursos">Mis Cursos</a>
+  <a href="/tutor/alumnos">Mis Alumnos</a>
+</nav>
+{% endblock %}
+
+
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'partials/footer.html' %}
+  {% include 'partials/scripts.html' %}
+</body>
+</html>

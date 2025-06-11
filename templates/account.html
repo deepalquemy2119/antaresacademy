@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account - Antares Courses</title>
+
+  <!-- Estilo base -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+  <!-- Estilo específico de la cuenta -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+</head>
+<body>
+
+  <section class="account-section">
+    <h1>Mi Cuenta</h1>
+
+    <div class="user-info">
+      <p><strong>Nombre:</strong> Juan Pérez</p>
+      <p><strong>Email:</strong> juan@example.com</p>
+      <p><strong>Miembro desde:</strong> enero 2024</p>
+    </div>
+
+    <div class="user-actions">
+      <button class="nav-btn">Editar Perfil</button>
+      <button class="nav-btn">Cambiar Contraseña</button>
+      <button class="nav-btn">Cerrar Sesión</button>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <a href="{{ url_for('index') }}" class="nav-btn">Volver al inicio</a>
+      <button class="nav-btn" onclick="history.back()">Volver a la anterior</button>
+
+
+    </div>
+  </section>
+
+
+<script>
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "Dark";
+    } else {
+      toggleBtn.textContent = "White";
+    }
+  });
+</script>
+
+
+</body>
+</html>

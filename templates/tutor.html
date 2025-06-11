@@ -1,0 +1,60 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel Tutor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tutor.css') }}">
+
+</head>
+<body>
+
+<div class="logo-section">
+  <div class="logo-container">
+    <img src="{{ url_for('static', filename='img/logo-antares-4.png') }}" alt="Logo Antares" class="logo-img" />
+  </div>
+</div>
+
+<main class="main-content">
+  <h1>Panel del Tutor</h1>
+  <p>Gestionar cursos, alumnos y más.</p>
+
+  <div style="margin-top: 2rem;">
+    <a href="{{ url_for('index') }}" class="nav-btn">Volver al inicio</a>
+    <button class="nav-btn" onclick="history.back()">Volver a la página anterior</button>
+  </div>
+
+
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2025 Antares Academy. Todos los derechos reservados.</p>
+</footer>
+
+
+<script>
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "Dark";
+    } else {
+      toggleBtn.textContent = "White";
+    }
+  });
+</script>
+
+
+
+</body>
+</html> -->
+
+
+{% extends "base_tutor.html" %}
+{% block content %}
+  <h2>Bienvenido Tutor</h2>
+  <p>Aquí puedes administrar tus sesiones y alumnos.</p>
+{% endblock %}

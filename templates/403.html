@@ -1,0 +1,6 @@
+{% extends "base_admin.html" %}
+{% block content %}
+  <h2>403 - Acceso Denegado</h2>
+  <p>No tienes permisos para ver esta página.</p>
+  <a class="nav-btn" href="{{ url_for('index') }}">Volver al inicio</a>
+{% endblock %}

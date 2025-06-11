@@ -1,0 +1,67 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+
+<div class="logo-section">
+ 
+  <div class="logo-container">
+    <img src="{{ url_for('static', filename='img/logo-antares-4.png') }}" alt="Logo Antares" class="logo-img" />
+    
+  </div>
+
+   
+</div>
+
+<main>
+
+    <h1>Dashboard del Administrador</h1>
+
+    <p>Gestiona usuarios, cursos y reportes.</p>
+    <ul>
+      <li><a href="#">Usuarios</a></li>
+      <li><a href="#">Cursos</a></li>
+      <li><a href="#">Reportes</a></li>
+    </ul>
+
+    <div class="nav-btn-container">
+      <a href="{{ url_for('index') }}" class=" volver  nav-btn">Volver al inicio</a>
+    </div>
+
+
+
+  </main>
+  <footer>&copy; 2025 Antares Academy</footer>
+
+
+
+<script>
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    if (document.body.classList.contains("light-mode")) {
+      toggleBtn.textContent = "Dark";
+    } else {
+      toggleBtn.textContent = "White";
+    }
+  });
+</script>
+
+
+</body>
+
+</html> -->
+
+
+{% extends "base_admin.html" %}
+{% block content %}
+<h2>Panel de administración</h2>
+<p>Bienvenido, administrador.</p>
+{% endblock %}

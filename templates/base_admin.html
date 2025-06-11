@@ -1,0 +1,25 @@
+<!-- templates/base_admin.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% include 'partials/head.html' %}
+  <title>Admin - Antares</title>
+</head>
+<body>
+  {% include 'partials/header.html' %}
+
+  <div class="main-nav">
+    <a href="{{ url_for('admin') }}" class="nav-btn">Panel Admin</a>
+    <a href="{{ url_for('account') }}" class="nav-btn">Cuenta</a>
+    <a href="{{ url_for('home') }}" class="nav-btn">Inicio</a>
+    <a href="{{ url_for('logout') }}" class="nav-btn">Salir</a>
+  </div>
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'partials/footer.html' %}
+  {% include 'partials/scripts.html' %}
+</body>
+</html>

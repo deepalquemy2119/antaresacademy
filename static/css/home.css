@@ -1,0 +1,32 @@
+.ingreso-contenedor {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.ingreso {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.rol-botones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.rol-btn {
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  background-color: #2e2f2f;
+  color: rgb(200, 194, 194);
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.rol-btn:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
