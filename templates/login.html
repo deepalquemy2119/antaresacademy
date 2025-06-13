@@ -1,6 +1,12 @@
 <!-- templates/login.html -->
 {% extends "base.html" %}
 {% block content %}
+
+<p>¿No tienes cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a></p>
+
+
+
+
 <div class="form-container">
   <h2>Iniciar Sesión</h2>
   {% if error %}
